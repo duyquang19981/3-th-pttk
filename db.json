@@ -170,11 +170,180 @@
     {
       "id": 23,
       "MaHopDong": 23,
-      "MaDoiTac": "1",
-      "NgayKy": "10-08-2020",
-      "ViTriDang": "123",
-      "ThoiHan": "18-08-2020",
-      "GiaHopDong": 20000022222
+      "MaDoiTac": "3",
+      "NgayKy": "20-11-2019",
+      "ViTriDang": "Right - Banner",
+      "ThoiHan": "20-11-2020",
+      "GiaHopDong": 2000000
+    },
+    {
+      "id": 24,
+      "MaHopDong": 24,
+      "MaDoiTac": "4",
+      "NgayKy": "20-11-2019",
+      "ViTriDang": "Footer",
+      "ThoiHan": "20-11-2022",
+      "GiaHopDong": 3000000
+    }
+  ],
+  "Comment": [
+    {
+      "id": 1,
+      "MaComment": 1,
+      "MaKhachHang": "KH01",
+      "NoiDung": "I like this product",
+      "NgayComment": "1/11/2020",
+      "Loai": "Good"
+    },
+    {
+      "id": 2,
+      "MaComment": 2,
+      "MaKhachHang": "KH01",
+      "NoiDung": "I do not like this product",
+      "NgayComment": "2/11/2020",
+      "Loai": "Bad"
+    },
+    {
+      "id": 3,
+      "MaComment": 3,
+      "MaKhachHang": "KH01",
+      "NoiDung": "I like this product",
+      "NgayComment": "3/11/2020",
+      "Loai": "Good"
+    },
+    {
+      "id": 4,
+      "MaComment": 4,
+      "MaKhachHang": "KH01",
+      "NoiDung": "I like this product",
+      "NgayComment": "4/11/2020",
+      "Loai": "Good"
+    },
+    {
+      "id": 5,
+      "MaComment": 5,
+      "MaKhachHang": "KH01",
+      "NoiDung": "I like this product",
+      "NgayComment": "5/11/2020",
+      "Loai": "Good"
+    },
+    {
+      "id": 6,
+      "MaComment": 6,
+      "MaKhachHang": "KH01",
+      "NoiDung": "I really love this product",
+      "NgayComment": "5/11/2020",
+      "Loai": "Good"
+    },
+    {
+      "id": 7,
+      "MaComment": 7,
+      "MaKhachHang": "KH02",
+      "NoiDung": "I like this product",
+      "NgayComment": "1/7/2020",
+      "Loai": "Good"
+    },
+    {
+      "id": 8,
+      "MaComment": 8,
+      "MaKhachHang": "KH02",
+      "NoiDung": "I like this product",
+      "NgayComment": "2/7/2020",
+      "Loai": "Good"
+    },
+    {
+      "id": 9,
+      "MaComment": 9,
+      "MaKhachHang": "KH02",
+      "NoiDung": "I like this product",
+      "NgayComment": "3/7/2020",
+      "Loai": "Good"
+    },
+    {
+      "id": 10,
+      "MaComment": 10,
+      "MaKhachHang": "KH02",
+      "NoiDung": "I like this product",
+      "NgayComment": "4/7/2020",
+      "Loai": "Good"
+    },
+    {
+      "id": 11,
+      "MaComment": 11,
+      "MaKhachHang": "KH02",
+      "NoiDung": "I like this product",
+      "NgayComment": "5/7/2020",
+      "Loai": "Good"
+    },
+    {
+      "id": 12,
+      "MaComment": 12,
+      "MaKhachHang": "KH03",
+      "NoiDung": "I like this product",
+      "NgayComment": "6/11/2020",
+      "Loai": "Good"
+    },
+    {
+      "id": 13,
+      "MaComment": 13,
+      "MaKhachHang": "KH03",
+      "NoiDung": "I like this product",
+      "NgayComment": "7/11/2021",
+      "Loai": "Good"
+    },
+    {
+      "id": 14,
+      "MaComment": 14,
+      "MaKhachHang": "KH04",
+      "NoiDung": "I like this product",
+      "NgayComment": "12/1/2020",
+      "Loai": "Good"
+    },
+    {
+      "id": 15,
+      "MaComment": 15,
+      "MaKhachHang": "KH04",
+      "NoiDung": "I like this product",
+      "NgayComment": "12/3/2020",
+      "Loai": "Good"
+    },
+    {
+      "id": 16,
+      "MaComment": 16,
+      "MaKhachHang": "KH01",
+      "NoiDung": "I like this product",
+      "NgayComment": "12/3/2020",
+      "Loai": "Good"
+    }
+  ],
+  "KhachHang": [
+    {
+      "MaKhachHang": "KH01",
+      "HoTen": "Nguyen Van A",
+      "DiaChi": "NULL",
+      "SDT": "123456",
+      "Email": "nguyenvanAgmail.com"
+    },
+    {
+      "MaKhachHang": "KH02",
+      "HoTen": "Nguyen Van B",
+      "DiaChi": "NULL",
+      "SDT": "123456789",
+      "Email": "nguyenvanBgmail.com"
+    },
+    {
+      "MaKhachHang": "KH03",
+      "HoTen": "Nguyen Van C",
+      "DiaChi": "NULL",
+      "SDT": "45545454",
+      "Email": "nguyenvanCgmail.com"
+    },
+    {
+      "MaKhachHang": "KH04",
+      "HoTen": "Nguyen Van D",
+      "DiaChi": "NULL",
+      "SDT": "3434454",
+      "Email": "nguyenvanDgmail.com"
     }
   ]
 }
