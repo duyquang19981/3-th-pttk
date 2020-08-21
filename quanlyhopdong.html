@@ -1,0 +1,534 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<title>Quản lý hợp đồng</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto|Varela+Round|Open+Sans">
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+<!-- JS, Popper.js, and jQuery -->
+
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
+<!-- axios -->
+<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+
+<script src="https://unpkg.com/gijgo@1.9.13/js/gijgo.min.js" type="text/javascript"></script>
+<link href="https://unpkg.com/gijgo@1.9.13/css/gijgo.min.css" rel="stylesheet" type="text/css" />
+
+<style>
+body {
+    color: #404E67;
+    background: #F5F7FA;
+    font-family: 'Open Sans', sans-serif;
+}
+header {
+    background: linear-gradient( rgba(0, 0, 0, 0.7), rgba(75, 74, 74, 0.7) ), url('img/banner.png');
+    height: 150px;
+    background-color: rgb(24, 24, 24);
+    background-repeat: no-repeat;
+    background-size: cover;
+    /* background-position: 0px -10px; */
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+}
+.table-wrapper {
+    width: 1200px;
+    margin: 30px auto;
+    background: #fff;
+    padding: 20px;	
+    box-shadow: 0 1px 1px rgba(0,0,0,.05);
+}
+.table-title {
+    padding-bottom: 10px;
+    margin: 0 0 10px;
+}
+.table-title h2 {
+    margin: 6px 0 0;
+    font-size: 22px;
+}
+.table-title .add-new {
+    float: right;
+    height: 30px;
+    font-weight: bold;
+    font-size: 12px;
+    text-shadow: none;
+    min-width: 100px;
+    border-radius: 50px;
+    line-height: 13px;
+}
+.table-title .add-new i {
+    margin-right: 4px;
+}
+table.table {
+    table-layout: fixed;
+}
+table.table tr th, table.table tr td {
+    border-color: #e9e9e9;
+}
+table.table th i {
+    font-size: 13px;
+    margin: 0 5px;
+    cursor: pointer;
+}
+table.table th:last-child {
+    width: 100px;
+}
+table.table td a {
+    cursor: pointer;
+    display: inline-block;
+    margin: 0 5px;
+    min-width: 24px;
+}    
+table.table td a.add {
+    color: #27C46B;
+}
+table.table td a.edit {
+    color: #FFC107;
+}
+table.table td a.delete {
+    color: #E34724;
+}
+table.table td i {
+    font-size: 19px;
+}
+table.table td a.add i {
+    font-size: 24px;
+    margin-right: -1px;
+    position: relative;
+    top: 3px;
+}    
+table.table .form-control {
+    height: 32px;
+    line-height: 32px;
+    box-shadow: none;
+    border-radius: 2px;
+}
+table.table .form-control.error {
+    border-color: #f50000;
+}
+table.table td .add {
+    display: none;
+}
+.logo{
+    height: 130px;
+}
+.header-title{
+    margin-left: 90px;
+    font-size: 37px;
+    font-weight: 600;
+    color: #e3e3e3;
+}
+.active{
+    pointer-events: none;
+}
+a.disabled {
+  pointer-events: none;
+  cursor: default;
+}
+</style>
+<script>
+    const port = 3003;
+    const url_NhanVien = `http://localhost:${port}/NhanVien`;
+    const url_HopDongQuangCao = `http://localhost:${port}/HopDongQuangCao`;
+    const url_DoiTacQuangCao = `http://localhost:${port}/DoiTacQuangCao`;
+    var urlParams;
+    var page = prevPage = nextPage = totalPage = greatestID =  1;
+    var maDoiTac;
+    const pageSize = 15;
+    var selectTag_DoiTac = '';
+    var CE = 0; // Count_Edit_Button_onClick
+    //get URL query
+    (window.onpopstate = function () {
+        var match,
+            pl     = /\+/g,  // Regex for replacing addition symbol with a space
+            search = /([^&=]+)=?([^&]*)/g,
+            decode = function (s) { return decodeURIComponent(s.replace(pl, " ")); },
+            query  = window.location.search.substring(1);
+        urlParams = {};
+        while (match = search.exec(query))
+        urlParams[decode(match[1])] = decode(match[2]);
+    })();
+    $(document).ready( async function(){
+        
+        var data_NhanVien =[];
+        var data_HopDongQuangCao =[];
+        var data_DoiTacQuangCao =[];
+        // get all data  
+        await axios.get(url_HopDongQuangCao).then(function(res){
+            data_HopDongQuangCao = res.data;
+            
+        });
+        for(i of data_HopDongQuangCao){
+            greatestID = greatestID<i.id ? i.id:greatestID;    
+        }
+        
+        //paginate
+        totalPage = Math.floor(data_HopDongQuangCao.length / pageSize) + 1 || 1;
+        page = Number(urlParams.page) || 1;
+        prevPage = page - 1;
+        nextPage = page + 1;
+
+        //get MaDoiTac 
+        maDoiTac = Number(urlParams.idDT) || 0;
+        
+        // get data in page
+        // if maDoiTac = 0 : get all
+        // else : query maDoiTac
+        if(maDoiTac==0){
+            await axios.get(url_HopDongQuangCao + `?_page=${page}&_limit=${pageSize}`).then(function(res){
+                data_HopDongQuangCao = res.data;
+            });
+        }
+        else{
+            await axios.get(url_HopDongQuangCao + `?MaDoiTac=${maDoiTac}&_page=${page}&_limit=${pageSize}`).then(function(res){
+                data_HopDongQuangCao = res.data;
+            });
+        }
+        
+        
+        await axios.get(url_DoiTacQuangCao).then(function(res){
+            data_DoiTacQuangCao = res.data;
+        });
+        
+            // create select tag
+        selectTag_DoiTac  = '<select class="form-control input " >';
+        for( i of data_DoiTacQuangCao){
+            selectTag_DoiTac += `<option value = '${i.MaDoiTac}'>${i.TenDoiTac}</option>`;
+        }
+        selectTag_DoiTac += '</select>';
+        
+        $('.search-block').append(selectTag_DoiTac);
+        $('.search-block').find("select:first-child").addClass('search-key-select');
+        $('.search-key-select').prepend('<option value = "0">--Tất cả--</option>');   //add Tatca option
+
+        $('.search-key-select').find(`option:nth-child(${Number(maDoiTac)+1})`).prop('selected','selected');    // option selected
+    
+        //render data
+        var tableNV = document.getElementById('table-body');
+        for(i in data_HopDongQuangCao){
+            // lay ten doi tac
+            let TenDoiTac = '';
+            for(j in data_DoiTacQuangCao){
+                if(data_DoiTacQuangCao[j].MaDoiTac == data_HopDongQuangCao[i].MaDoiTac){
+                    TenDoiTac = data_DoiTacQuangCao[j].TenDoiTac ;
+                    break;
+                }
+                else{ 
+                    TenDoiTac = "Unknown";
+                }
+            }
+            
+            let row =   '<tr> '+ `
+                            <td>${data_HopDongQuangCao[i].MaHopDong}</td>
+                            <td>${TenDoiTac}</td>
+                            <td>${data_HopDongQuangCao[i].NgayKy}</td>
+                            <td>${data_HopDongQuangCao[i].ViTriDang}</td>
+                            <td>${data_HopDongQuangCao[i].ThoiHan}</td>
+                            <td>${data_HopDongQuangCao[i].GiaHopDong}</td>
+                            <td>
+                                <a class="add" title="Add" data-toggle="tooltip"><i class="material-icons">&#xE03B;</i></a>
+                                <a class="edit" title="Edit" data-toggle="tooltip"><i class="material-icons">&#xE254;</i></a>
+                                <a class="delete" title="Delete" data-toggle="tooltip"><i class="material-icons">&#xE872;</i></a>
+                            </td>
+                        </tr>`;
+            $("tbody").append(row);
+        }
+        //pagination bar
+        if(prevPage < 1){
+            $(".prevpage-item").addClass('disabled');
+        }
+        else{
+            $("#prevpage-link").attr('href',`quanlyhopdong.html?idDT=${maDoiTac}&page=${prevPage}`);
+            //console.log('pre false');
+        }
+
+        if(nextPage > totalPage){
+            $(".nextpage-item").addClass('disabled');
+        }
+        else{
+            $("#nextpage-link").attr('href',`quanlyhopdong.html?idDT=${maDoiTac}&page=${nextPage}`);
+        }
+        
+        for (let i = 1; i <= totalPage; i++) {
+            let html = `<li id="item-${i}" class="page-item "><a class="page-link" href="quanlyhopdong.html?idDT=${maDoiTac}&page=${i}">${i}</a></li>`;
+            $("#totalpage").append(html);
+             //mark active
+            if(i == page){
+                $(`#item-${i}`).addClass('active');
+            }
+        }
+        //
+        $('[data-toggle="tooltip"]').tooltip();
+        var actions = $("table td:last-child").html();
+        // Append table with add row form on add new button click
+        
+        $(".add-new").click( async function(){
+            $(this).attr("disabled", "disabled");
+            
+            var index = $("table tbody tr:last-child").index();
+            
+            var row = '<tr>' +
+                '<td><input  type="text" class="form-control input" name="MaHopDong" id="MaHopDong" readonly="readonly"></td>' +
+                //'<td><input  type="text" class="form-control input" name="TenDoiTac" id="TenDoiTac" placeholder = "Input ID: 1,2 or 3" ></td>' +
+                '<td>'+selectTag_DoiTac+'</td>' +
+                '<td><input type="text" class="form-control input" name="NgayKy" id="datepicker_add1"  value="" readonly ></td>' +
+                '<td><input type="text" class="form-control input" name="ViTriDang" id="ViTriDang"></td>' +
+                '<td><input type="text" class="form-control input" name="ThoiHan" id="datepicker_add2" value="" readonly ></td>' +
+                '<td><input type="text" class="form-control input" name="GiaTri" id="GiaTri"></td>' +
+                '<td>' + actions + '</td>' +
+            '</tr>';
+            
+            $("table").append(row);		
+            $('.delete').hide();
+            $("table tbody tr").eq(index + 1).find(".add, .edit").toggle();
+            $('[data-toggle="tooltip"]').tooltip();
+            $("#datepicker_add1").datepicker({
+                    format: 'dd-mm-yyyy',
+                    maxDate: new Date()
+            });
+            $("#datepicker_add2").datepicker({
+                    showButtonPanel: false,
+                    format: 'dd-mm-yyyy',
+                    minDate: new Date()
+            });
+        });
+        // Add row on add button click
+        $(document).on("click", ".add", function(){
+            var empty = false;
+           // var input = $(this).parents("tr").find('input[type="text"]');
+            var input = $(this).parents("tr").find('.input');
+            //return;
+            let i = 0;
+            input.each(function(){
+                if(!$(this).val() && i!=0 ){        //~
+                    $(this).addClass("error");
+                    empty = true;
+                } else{
+                    $(this).removeClass("error");
+                }
+                i++;
+            });
+          
+            if(!Number(input[5].value)){
+                alert('Gia Tri must be a number!');
+                return;
+            }
+            $(this).parents("tr").find(".error").first().focus();
+            if(!empty){
+                let i = 0 ;
+                input.each(function(){                  
+                    if(i==0 ){
+                        if( !input[0].value){
+                            $(this).parent("td").html(greatestID+1);
+                        }
+                        else{
+                            $(this).parent("td").html($(this).val());                           
+                        }
+                    }
+                
+                    $(this).closest("td").html($(this).val());
+                    i++;
+                });			    
+                $(this).parents("tr").find(".add, .edit").toggle();
+                $(".add-new").removeAttr("disabled");
+
+                //check: add or edit        
+                $('.delete').show();
+                const MaDoiTac = input[1].value;
+                const NgayKy = input[2].value;
+                const ViTriDang = input[3].value;
+                const ThoiHan = input[4].value;
+                const GiaTri = input[5].value;
+                if(!input[0].value){
+                    console.log('add');
+                    // ADD
+                    axios({
+                        method: 'POST',
+                        url: `http://localhost:${port}/HopDongQuangCao/`,
+                        data: {
+                            id: (greatestID + 1),
+                            MaHopDong : (greatestID + 1),
+                            MaDoiTac: MaDoiTac,
+                            NgayKy: NgayKy,
+                            ViTriDang :ViTriDang,
+                            ThoiHan : ThoiHan,
+                            GiaHopDong : Number(GiaTri)
+                        }
+                    });
+                    greatestID++;
+                }
+                else{
+                    console.log('update');
+                    // UPDATE
+                    axios({
+                        method: 'PATCH',
+                        url: `http://localhost:${port}/HopDongQuangCao/${input[0].value}`,
+                        data: {
+                           // MaDoiTac: MaDoiTac,
+                            NgayKy: NgayKy,
+                            ViTriDang :ViTriDang,
+                            ThoiHan : ThoiHan,
+                            GiaHopDong : Number(GiaTri)
+                        }
+                    });
+                }
+            
+            }		
+        });
+        // Edit row on edit button click
+        $(document).on("click", ".edit", function(){	
+	
+            $(this).parents("tr").find("td:first-child").each(function(){
+                $(this).html('<input type="text" class="form-control input" value="' + $(this).text() + '" readonly="readonly">');
+            });	
+            $(this).parents("tr").find("td:nth-child(2)").each(function(){
+                $(this).html('<input type="text" class="form-control input" value="' + $(this).text() + '" readonly="readonly">');
+              
+            });	
+            $(this).parents("tr").find("td:nth-child(3)").each(function(){
+                // $(this).html('<input type="text" class="form-control input" value="' + $(this).text() + '" readonly="readonly">');
+                $(this).html('<input type="text" class="form-control input" id="datepicker_edit1_'+ CE +'"  value="'+ $(this).text() +'" readonly >');
+            });	
+            $(this).parents("tr").find("td:nth-child(5)").each(function(){
+                // $(this).html('<input type="text" class="form-control input" value="' + $(this).text() + '" readonly="readonly">');
+                $(this).html('<input type="text" class="form-control input" id="datepicker_edit2_'+ CE +'"  value="'+ $(this).text() +'" readonly >');
+            });	
+            $(this).parents("tr").find("td:not(:last-child):not(:first-child):not(:nth-child(2)):not(:nth-child(3)):not(:nth-child(5))").each(function(){
+                $(this).html('<input type="text" class="form-control input" value="' + $(this).text() + '">');
+            });		
+
+            
+            $("#datepicker_edit1_" + CE).datepicker({
+                    format: 'dd-mm-yyyy',
+                    maxDate : new Date(),
+                    
+            }).on('change', function() {
+                var selected = $(this).val();
+                console.log('selected :>> ', selected);
+            });;
+            $("#datepicker_edit2_" + CE).datepicker({
+                    format: 'dd-mm-yyyy',
+                    minDate : new Date(),
+            });
+
+            $(this).parents("tr").find(".add, .edit").toggle();
+            $(".add-new").attr("disabled", "disabled");
+
+            CE ++;
+            // $('.delete').hide();
+        });
+        // Delete row on delete button click
+        $(document).on("click", ".delete", function(){
+            var id_ele =  $(this).parents("tr").find("td:first-child");
+            var id = id_ele[0].innerText;
+            if(!id){
+                id_ele =  $(this).parents("tr").children(':first-child').children(':first-child');
+                id = id_ele.val();
+            }
+            
+            if(window.confirm(`Delete this record? (ID=${id})`)){
+                //DELETE
+                axios({
+                        method: 'DELETE',
+                        url: `http://localhost:${port}/HopDongQuangCao/${id}`,
+                }).then(()=>{
+                    $(this).parents("tr").remove();
+                    $(".add-new").removeAttr("disabled");
+                    alert(`The record has been deleted! (ID=${id})`);
+                }).catch((error)=>{
+                    alert("Failed! " + error);
+                });
+            }
+            
+        });
+        $(document).on("click", "#search", function(){
+            var search_key =  $('.search-key-select').val();
+            console.log('search_key :>> ', search_key);
+            console.log('page :>> ', page);
+            window.location.replace(`quanlyhopdong.html?idDT=${search_key}&page=${page}`);
+        });
+    });
+
+
+</script>
+</head>
+<body>
+    <header style="padding: 0px 50px;">
+        <div> <a class = "logo-link" href="trangchu.html"> <img src="img/logo-khtn.png" alt="logo" class="logo"></a> </div>
+        <div class="header-title">
+            HỆ THỐNG QUẢN LÝ BÁN HÀNG QUA MẠNG - R18
+        </div>
+    </header>
+
+    <div class="container-fluid">
+        <div style="font-size: 38px; font-weight: 500; margin: 50px auto;  text-align: center; "> <span style="display: inline-block;">QUẢN LÝ HỢP ĐỒNG QUẢNG CÁO</span></div>
+        <div style="margin-left:125px" ><a href="trangchu.html"><button class="btn btn-lg btn-warning">Quay về</button></a> </div>
+        <div class="row h-100 justify-content-center">
+            <div class = "search-block col-md-4">
+                <!-- select tag: doi tac  -->
+            </div>
+            <div>
+                <button class="btn btn-danger" id="search" >Tìm kiếm </button>
+            </div>
+        </div>
+        
+        <div class="table-responsive">
+            <div class="table-wrapper">
+                <div class="table-title">
+                    <div class="row">
+                        <div class="col-sm-8"><h2>Hợp đồng quảng cáo <b></b></h2></div>
+                        <div class="col-sm-4">
+                            <a href="#end-of-table"><button type="button" class="btn btn-info add-new"><i class="fa fa-plus"></i> Add New</button></a>
+                        </div>
+                    </div>
+                </div>
+                <table class="table table-bordered table-nhanvien">
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Đối Tác</th>
+                            <th>Ngày ký</th>
+                            <th>Vị trí đăng</th>
+                            <th>Thời hạn</th>
+                            <th>Giá trị</th>
+                            <th>Thao tác</th>
+                        </tr>
+                    </thead>
+                    <tbody id = "table-body">
+                        
+                    </tbody>
+                    
+                </table>
+                
+                <nav aria-label="Page navigation example">
+                    <ul class="pagination pagination-md justify-content-center">
+                        <li class="page-item prevpage-item">
+                        <a id="prevpage-link" class="page-link" href="#" aria-label="Previous">
+                            <span aria-hidden="true">&laquo;</span>
+                            <span class="sr-only">Previous</span>
+                        </a>
+                        </li>
+                        <ul class="pagination pagination-md" id = "totalpage">
+                            
+                        </ul>
+                        <li class="page-item nextpage-item">
+                        <a id="nextpage-link" class="page-link" href="#" aria-label="Next">
+                            <span aria-hidden="true">&raquo;</span>
+                            <span class="sr-only">Next</span>
+                        </a>
+                        </li>
+                    </ul>
+                </nav>
+                <a id="end-of-table"></a>
+            </div>
+        </div>
+        
+    </div>     
+</body>
+</html>
