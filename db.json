@@ -15,13 +15,13 @@
   ],
   "HopDongQuangCao": [
     {
-      "MaHopDong": 1,
-      "MaDoiTac": "Shopee",
-      "ViTriDang": "Left - Banner",
-      "ThoiHan": "05-08-2020",
-      "GiaHopDong": 2000,
       "id": 1,
-      "NgayKy": "10-08-2020"
+      "MaHopDong": 1,
+      "MaDoiTac": 1,
+      "NgayKy": "04-11-2019",
+      "ViTriDang": "Top - Banner",
+      "ThoiHan": "10-11-2020",
+      "GiaHopDong": 3000000
     },
     {
       "id": 2,
@@ -166,6 +166,15 @@
       "ViTriDang": "Bot - Banner",
       "ThoiHan": "27-08-2020",
       "GiaHopDong": 2000000
+    },
+    {
+      "id": 23,
+      "MaHopDong": 23,
+      "MaDoiTac": "1",
+      "NgayKy": "10-08-2020",
+      "ViTriDang": "123",
+      "ThoiHan": "18-08-2020",
+      "GiaHopDong": 20000022222
     }
   ]
 }
