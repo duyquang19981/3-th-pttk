@@ -232,31 +232,88 @@
   ],
   "DonNhapHang": [
     {
-      "Id": 1,
+      "id": 1,
+      "MaDonNhap": 1,
       "MaNV": 1,
       "NgayLap": "16/8/2020",
       "TongSoLuongNhap": 10,
       "LiDoNhap": "ly do nhap",
-      "MaNCC": 1
+      "MaNCC": 1,
+      "TongGia": 2500000
+    }
+  ],
+  "DSDonNhapHang": [
+    {
+      "MaDonNhap": 1,
+      "MaMatHang": 1,
+      "SoLuongNhap": 10,
+      "TongGia": 1500000
+    },
+    {
+      "MaDonNhap": 1,
+      "MaMatHang": 2,
+      "SoLuongNhap": 10,
+      "TongGia": 1000000
     }
   ],
   "MatHang": [
     {
-      "Id": 1,
-      "Ten": "Mặt hàng 1",
+      "MaMatHang": 1,
+      "MaLoai": 1,
+      "TenMatHang": "Mặt hàng 1",
       "SoLuongToiDa": 100,
       "SoLuongConLai": 10,
-      "Gia": 50000
+      "Gia": 150000
+    },
+    {
+      "MaMatHang": 2,
+      "MaLoai": 1,
+      "TenMatHang": "Mặt hàng 2",
+      "SoLuongToiDa": 100,
+      "SoLuongConLai": 10,
+      "Gia": 100000
     }
   ],
   "ChungLoai": [
     {
-      "Id": 1,
-      "Ten": "Loại 1"
+      "MaLoai": 1,
+      "TenLoai": "Loại 1"
     },
     {
-      "Id": 2,
-      "Ten": "Loại 2"
+      "MaLoai": 2,
+      "TenLoai": "Loại 2"
+    }
+  ],
+  "NhanVien": [
+    {
+      "MaNV": 1,
+      "TenNV": "Nhân viên 1",
+      "DiaChi": "Hồ chí minh",
+      "SDT": "0123456789",
+      "Email": "a@gmail.com"
+    },
+    {
+      "MaNV": 2,
+      "TenNV": "Nhân viên 2",
+      "DiaChi": "Hồ chí minh",
+      "SDT": "0123456798",
+      "Email": "b@gmail.com"
+    }
+  ],
+  "NhaCungCap": [
+    {
+      "MaNCC": 1,
+      "TenNCC": "NCC 1",
+      "DiaChi": "Hồ chí minh",
+      "LoaiHangCC": "",
+      "MatHang": 1
+    },
+    {
+      "MaNV": 2,
+      "TenNCC": "NCC 2",
+      "DiaChi": "Hồ chí minh",
+      "LoaiHangCC": "",
+      "MatHang": 2
     }
   ]
 }

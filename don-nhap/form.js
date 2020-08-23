@@ -1,6 +1,10 @@
 const port = 3003;
 const url_DonNhapHang = `http://localhost:${port}/DonNhapHang`;
 const url_MatHang = `http://localhost:${port}/MatHang`;
+const url_NhanVien = `http://localhost:${port}/NhanVien`;
+const url_DSDonNhapHang = `http://localhost:${port}/DSDonNhapHang`;
+const url_NhaCungCap = `http://localhost:${port}/NhaCungCap`;
+
 var urlParams;
 
 //get URL query

@@ -1,9 +1,15 @@
-.page-title{
+.page-title {
     font-weight: bold;
-    text-align: center;
-    margin-top: 20px;
+    text-align : center;
+    margin-top : 20px;
+    margin-bottom: 0;
 }
 
-.card{
+.content {
     margin-top: 10px;
+}
+
+.btn-back {
+    position: absolute;
+    left: 50px;
 }

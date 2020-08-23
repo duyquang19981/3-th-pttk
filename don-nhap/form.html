@@ -6,7 +6,7 @@
       name="viewport"
       content="width=device-width, initial-scale=1, shrink-to-fit=no"
     />
-    <title>Quản lý hợp đồng</title>
+    <title>Lập đơn nhập</title>
     <link
       rel="stylesheet"
       href="https://fonts.googleapis.com/css?family=Roboto|Varela+Round|Open+Sans"
@@ -23,11 +23,119 @@
       rel="stylesheet"
       href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"
     />
-
+    <!-- <link
+      rel="stylesheet"
+      href="https://cdn.datatables.net/1.10.21/css/jquery.dataTables.min.css"
+    /> -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.3/css/bootstrap.css"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdn.datatables.net/1.10.21/css/dataTables.bootstrap4.min.css"
+    />
     <link rel="stylesheet" href="../styles.css" />
     <link rel="stylesheet" href="./don-nhap.css" />
+  </head>
+  <body>
+    <header style="padding: 0px 50px;">
+      <div>
+        <a class="logo-link" href="trangchu.html">
+          <img
+            style="width: 80px; height: 70px;"
+            src="../img/logo-khtn.png"
+            alt="logo"
+            class="logo"
+        /></a>
+      </div>
+      <div class="header-title">
+        HỆ THỐNG QUẢN LÝ BÁN HÀNG QUA MẠNG - R18
+      </div>
+    </header>
+
+    <div class="container-fluid">
+      <div style="padding-bottom: 20px;">
+        <div class="btn-back">
+          <a href="trangchu.html"
+            ><button class="btn btn-lg btn-warning">Quay về</button></a
+          >
+        </div>
+        <h4 class="page-title text-center">LẬP ĐƠN NHẬP</h4>
+      </div>
+      <div class="row content">
+        <div class="col-5">
+          <div class="card">
+            <div class="card-body">
+              <!-- <h5 class="card-title">Card title</h5> -->
+              <form>
+                <div class="form-group">
+                  <label for="reason">Lý do nhập</label>
+                  <input
+                    type="text"
+                    class="form-control"
+                    id="reason"
+                    placeholder="Lý do nhập"
+                  />
+                </div>
+                <div class="form-row">
+                  <div class="form-group col-md-7">
+                    <label for="selectMatHang">Mặt hàng</label>
+                    <select id="selectMatHang" class="form-control"> </select>
+                  </div>
+                  <div class="form-group col-md-5">
+                    <label for="count">Số lượng</label>
+                    <input
+                      type="number"
+                      class="form-control"
+                      id="count"
+                      placeholder="Số lượng"
+                    />
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label for="selectNV">Nhân viên</label>
+                  <select id="selectNV" class="form-control"> </select>
+                </div>
+                <div class="form-group">
+                  <label for="selectNhaCungCap">Nhà cung cấp</label>
+                  <select id="selectNhaCungCap" class="form-control"> </select>
+                </div>
+
+                <button onclick="themMatHang()" class="btn btn-primary">
+                  Thêm mặt hàng
+                </button>
+              </form>
+            </div>
+          </div>
+        </div>
+        <div class="col-7">
+          <div class="card">
+            <div class="card-body">
+              <h5 class="card-title">Card title</h5>
+              <table
+                datatable
+                id="mathang_table"
+                class="table table-bordered table-striped"
+              >
+                <thead>
+                  <tr>
+                    <th>Mặt hàng</th>
+                    <th>Số lượng</th>
+                    <th>Giá</th>
+                    <th>Tác vụ</th>
+                  </tr>
+                </thead>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
 
     <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <script src="https://cdn.datatables.net/1.10.21/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/1.10.21/js/dataTables.bootstrap4.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
     <!-- axios -->
@@ -36,15 +144,69 @@
     <script src="./form.js"></script>
 
     <script>
+      var table;
       $(document).ready(async function () {
-        console.log("url_MatHang", url_MatHang);
-        console.log("urlParams", urlParams);
+        table = $("#mathang_table").DataTable({
+          searching: false,
+          lengthChange: false,
+          columns: [
+            { data: "matHang" },
+            { data: "soLuong" },
+            { data: "gia" },
+            {
+              data: null,
+              render: (data) => {
+                return `<button id="btn_delete" class="btn btn-danger btn-sm">Xóa</button>`;
+              },
+            },
+          ],
+        });
+
+        var data_DSDonNhap = [];
+        var data_DonNhap = [];
         var data_MatHang = [];
+        var data_NhanVien = [];
+        var data_NhaCungCap = [];
 
         // get all data
+        await axios.get(url_NhaCungCap).then((res) => {
+          data_NhaCungCap = res.data;
+          let select = document.getElementById("selectNhaCungCap");
+          for (let index = 0; index < data_NhaCungCap.length; index++) {
+            let option = document.createElement("option");
+            let element = data_NhaCungCap[index];
+            option.text = element.TenNCC;
+            option.value = element.MaNCC;
+            select.options.add(option, index);
+          }
+        });
+
+        await axios.get(url_DSDonNhapHang).then((res) => {
+          data_DSDonNhap = res.data;
+        });
+
         await axios.get(url_MatHang).then((res) => {
-          console.log(res);
           data_MatHang = res.data;
+          let select = document.getElementById("selectMatHang");
+          for (let index = 0; index < data_MatHang.length; index++) {
+            let option = document.createElement("option");
+            let element = data_MatHang[index];
+            option.text = element.TenMatHang;
+            option.value = JSON.stringify(element);
+            select.options.add(option, index);
+          }
+        });
+
+        await axios.get(url_NhanVien).then((res) => {
+          data_NhanVien = res.data;
+          let select = document.getElementById("selectNV");
+          for (let index = 0; index < data_NhanVien.length; index++) {
+            let option = document.createElement("option");
+            let element = data_NhanVien[index];
+            option.text = element.TenNV;
+            option.value = element.MaNV;
+            select.options.add(option, index);
+          }
         });
 
         // if (!input[0].value) {
@@ -79,107 +241,28 @@
         //   });
         // }
       });
+
+      function themMatHang($event) {
+        event.preventDefault();
+        let reason = $("#reason").val();
+        let count = $("#count").val();
+        let matHang = JSON.parse($("#selectMatHang").val());
+        let nv = $("#selectNV").val();
+        let ncc = $("#selectMatHang").val();
+        let row = [
+          {
+            matHang: matHang.TenMatHang,
+            soLuong: count,
+            gia: matHang.Gia,
+          },
+        ];
+        table.rows.add(row).draw();
+        console.log(row);
+      }
+
+      $("#mathang_table").on("click", "button.btn", function () {
+        table.row($(this).parents("tr")).remove().draw();
+      });
     </script>
-  </head>
-  <body>
-    <header style="padding: 0px 50px;">
-      <div>
-        <a class="logo-link" href="trangchu.html">
-          <img
-            style="width: 80px; height: 70px;"
-            src="../img/logo-khtn.png"
-            alt="logo"
-            class="logo"
-        /></a>
-      </div>
-      <div class="header-title">
-        HỆ THỐNG QUẢN LÝ BÁN HÀNG QUA MẠNG - R18
-      </div>
-    </header>
-
-    <div class="container-fluid">
-      <h4 class="page-title">LẬP ĐƠN NHẬP</h4>
-      <div style="margin-left: 125px;">
-        <a href="trangchu.html"
-          ><button class="btn btn-lg btn-warning">Quay về</button></a
-        >
-      </div>
-
-      <div class="card">
-        <div class="card-body">
-          <h5 class="card-title">Card title</h5>
-          <form>
-            <div class="form-row">
-              <div class="form-group col-md-6">
-                <label for="inputEmail4">Email</label>
-                <input
-                  type="email"
-                  class="form-control"
-                  id="inputEmail4"
-                  placeholder="Email"
-                />
-              </div>
-              <div class="form-group col-md-6">
-                <label for="inputPassword4">Password</label>
-                <input
-                  type="password"
-                  class="form-control"
-                  id="inputPassword4"
-                  placeholder="Password"
-                />
-              </div>
-            </div>
-            <div class="form-group">
-              <label for="inputAddress">Address</label>
-              <input
-                type="text"
-                class="form-control"
-                id="inputAddress"
-                placeholder="1234 Main St"
-              />
-            </div>
-            <div class="form-group">
-              <label for="inputAddress2">Address 2</label>
-              <input
-                type="text"
-                class="form-control"
-                id="inputAddress2"
-                placeholder="Apartment, studio, or floor"
-              />
-            </div>
-            <div class="form-row">
-              <div class="form-group col-md-6">
-                <label for="inputCity">City</label>
-                <input type="text" class="form-control" id="inputCity" />
-              </div>
-              <div class="form-group col-md-4">
-                <label for="inputState">State</label>
-                <select id="inputState" class="form-control">
-                  <option selected>Choose...</option>
-                  <option>...</option>
-                </select>
-              </div>
-              <div class="form-group col-md-2">
-                <label for="inputZip">Zip</label>
-                <input type="text" class="form-control" id="inputZip" />
-              </div>
-            </div>
-            <div class="form-group">
-              <div class="form-check">
-                <input
-                  class="form-check-input"
-                  type="checkbox"
-                  id="gridCheck"
-                />
-                <label class="form-check-label" for="gridCheck">
-                  Check me out
-                </label>
-              </div>
-            </div>
-            <button type="submit" class="btn btn-primary">Sign in</button>
-          </form>
-        </div>
-      </div>
-    </div>
   </body>
 </html>
