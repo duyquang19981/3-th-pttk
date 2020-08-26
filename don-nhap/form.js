@@ -4,6 +4,7 @@ const url_MatHang = `http://localhost:${port}/MatHang`;
 const url_NhanVien = `http://localhost:${port}/NhanVien`;
 const url_DSDonNhapHang = `http://localhost:${port}/DSDonNhapHang`;
 const url_NhaCungCap = `http://localhost:${port}/NhaCungCap`;
+const url_NhaCungCapMatHang = `http://localhost:${port}/NhaCungCapMatHang`;
 
 var urlParams;
 

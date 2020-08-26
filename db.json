@@ -233,32 +233,90 @@
   "DonNhapHang": [
     {
       "id": 1,
-      "MaDonNhap": 1,
       "MaNV": 1,
       "NgayLap": "16/8/2020",
-      "TongSoLuongNhap": 10,
+      "TongSoLuongNhap": 12,
       "LiDoNhap": "ly do nhap",
       "MaNCC": 1,
-      "TongGia": 2500000
+      "TongGia": 150000
+    },
+    {
+      "MaNV": "2",
+      "NgayLap": "22/02/2020",
+      "TongSoLuongNhap": 5,
+      "LiDoNhap": "asd",
+      "MaNCC": 2,
+      "TongGia": 500000,
+      "id": 2
+    },
+    {
+      "MaNV": "1",
+      "NgayLap": "22/02/2020",
+      "TongSoLuongNhap": 5,
+      "LiDoNhap": "asdasdasd",
+      "MaNCC": 2,
+      "TongGia": 500000,
+      "id": 3
+    },
+    {
+      "MaNV": "1",
+      "NgayLap": "22/02/2020",
+      "TongSoLuongNhap": 3,
+      "LiDoNhap": "sdsd",
+      "MaNCC": 2,
+      "TongGia": 300000,
+      "id": 4
+    },
+    {
+      "MaNV": "1",
+      "NgayLap": "26/8/2020",
+      "TongSoLuongNhap": 22,
+      "LiDoNhap": "ssdasd",
+      "MaNCC": 2,
+      "TongGia": 2200000,
+      "id": 5
     }
   ],
   "DSDonNhapHang": [
     {
+      "id": 1,
       "MaDonNhap": 1,
       "MaMatHang": 1,
-      "SoLuongNhap": 10,
-      "TongGia": 1500000
+      "SoLuongNhap": 12,
+      "TongGia": 150000
     },
     {
-      "MaDonNhap": 1,
+      "MaDonNhap": 2,
       "MaMatHang": 2,
-      "SoLuongNhap": 10,
-      "TongGia": 1000000
+      "SoLuongNhap": 5,
+      "TongGia": 500000,
+      "id": 2
+    },
+    {
+      "MaDonNhap": 3,
+      "MaMatHang": 2,
+      "SoLuongNhap": 5,
+      "TongGia": 500000,
+      "id": 3
+    },
+    {
+      "MaDonNhap": 4,
+      "MaMatHang": 2,
+      "SoLuongNhap": 3,
+      "TongGia": 300000,
+      "id": 4
+    },
+    {
+      "MaDonNhap": 5,
+      "MaMatHang": 2,
+      "SoLuongNhap": 22,
+      "TongGia": 2200000,
+      "id": 5
     }
   ],
   "MatHang": [
     {
-      "MaMatHang": 1,
+      "id": 1,
       "MaLoai": 1,
       "TenMatHang": "Mặt hàng 1",
       "SoLuongToiDa": 100,
@@ -266,11 +324,11 @@
       "Gia": 150000
     },
     {
-      "MaMatHang": 2,
+      "id": 2,
       "MaLoai": 1,
       "TenMatHang": "Mặt hàng 2",
       "SoLuongToiDa": 100,
-      "SoLuongConLai": 10,
+      "SoLuongConLai": 47,
       "Gia": 100000
     }
   ],
@@ -309,7 +367,7 @@
       "MatHang": 1
     },
     {
-      "MaNV": 2,
+      "MaNCC": 2,
       "TenNCC": "NCC 2",
       "DiaChi": "Hồ chí minh",
       "LoaiHangCC": "",

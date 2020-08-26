@@ -13,3 +13,9 @@
     position: absolute;
     left: 50px;
 }
+
+.btn_add{
+    display: flex;
+    align-items: flex-end;
+    justify-content: flex-end;
+}
