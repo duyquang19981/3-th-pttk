@@ -57,7 +57,7 @@
     <div class="container-fluid">
       <div style="padding-bottom: 20px;">
         <div class="btn-back">
-          <a href="trangchu.html"
+          <a href="./index.html"
             ><button class="btn btn-lg btn-warning">Quay về</button></a
           >
         </div>
@@ -108,12 +108,6 @@
                 <div class="form-group">
                   <label for="selectNhaCungCap">Nhà cung cấp</label>
                   <input class="form-control" disabled id="selectNhaCungCap" />
-                  <!-- <select
-                    id="selectNhaCungCap"
-                    class="form-control"
-                  >
-                  <option value="null" disabled selected>-- Chọn --</option>
-                  </select> -->
                 </div>
 
                 <div class="form-group">
@@ -133,37 +127,6 @@
             </div>
           </div>
         </div>
-        <!-- <div class="col-7">
-          <div class="card">
-            <div class="card-body">
-                <div class="form-group col-md-3 btn_add">
-                  <button
-                    onclick="themMatHang()"
-                    class="btn btn-outline-primary"
-                  >
-                    Thêm mặt hàng
-                  </button>
-                </div>
-              </div>
-              <div class="table-responsive">
-                <table
-                  datatable
-                  id="mathang_table"
-                  class="table table-bordered table-striped"
-                >
-                  <thead>
-                    <tr>
-                      <th>Mặt hàng</th>
-                      <th>Số lượng</th>
-                      <th>Giá</th>
-                      <th>Tác vụ</th>
-                    </tr>
-                  </thead>
-                </table>
-              </div>
-            </div>
-          </div>
-        </div> -->
       </div>
     </div>
 
@@ -178,8 +141,6 @@
     <script src="./form.js"></script>
 
     <script>
-      // var table;
-      // var data_DSDonNhap = [];
       var data_DonNhap = [];
       var data_MatHang = [];
       var data_NhanVien = [];
@@ -188,96 +149,12 @@
       var ncc_selected = null;
       var matHang_selected = null;
       $(document).ready(async function () {
-        // table = $("#mathang_table").DataTable({
-        //   pageLength: 5,
-        //   searching: false,
-        //   lengthChange: false,
-        //   columns: [
-        //     { data: "matHang" },
-        //     { data: "soLuong" },
-        //     { data: "gia" },
-        //     {
-        //       data: null,
-        //       render: (data) => {
-        //         return `<button id="btn_delete" class="btn btn-danger btn-sm">Xóa</button>`;
-        //       },
-        //     },
-        //   ],
-        // });
-
-        // get NCC data
-        // await axios.get(url_NhaCungCap).then((res) => {
-        //   data_NhaCungCap = res.data;
-        //   if (data_NhaCungCap && data_NhaCungCap.length) {
-        //     ncc_selected = data_NhaCungCap[0];
-        //   }
-        //   let select = document.getElementById("selectNhaCungCap");
-        //   for (let index = 0; index < data_NhaCungCap.length; index++) {
-        //     let option = document.createElement("option");
-        //     let element = data_NhaCungCap[index];
-        //     option.text = element.TenNCC;
-        //     option.value = element.MaNCC;
-        //     select.options.add(option, index + 1);
-        //   }
-        // });
-
-        // // get Ds don nhap
-        // await axios.get(url_DSDonNhapHang).then((res) => {
-        //   data_DSDonNhap = res.data;
-        // });
-
         // get Ds mat hang
         await getDsMatHang();
 
         // get Ds nhan vien
         await getDsNhanVien();
-
-        // if (!input[0].value) {
-        //   console.log("add");
-        //   // ADD
-        //   axios({
-        //     method: "POST",
-        //     url: `http://localhost:${port}/HopDongQuangCao/`,
-        //     data: {
-        //       id: greatestID + 1,
-        //       MaHopDong: greatestID + 1,
-        //       MaDoiTac: MaDoiTac,
-        //       NgayKy: NgayKy,
-        //       ViTriDang: ViTriDang,
-        //       ThoiHan: ThoiHan,
-        //       GiaHopDong: Number(GiaTri),
-        //     },
-        //   });
-        //   greatestID++;
-        // } else {
-        //   console.log("update");
-        //   // UPDATE
-        //   axios({
-        //     method: "PATCH",
-        //     url: `http://localhost:${port}/HopDongQuangCao/${input[0].value}`,
-        //     data: {
-        //       // MaDoiTac: MaDoiTac,
-        //       ViTriDang: ViTriDang,
-        //       ThoiHan: ThoiHan,
-        //       GiaHopDong: Number(GiaTri),
-        //     },
-        //   });
-        // }
       });
-
-      // function getMatHangByNCC(id){
-      //   await axios.get(url_MatHang+`?`).then((res) => {
-      //     data_MatHang = res.data;
-      //     let select = document.getElementById("selectMatHang");
-      //     for (let index = 0; index < data_MatHang.length; index++) {
-      //       let option = document.createElement("option");
-      //       let element = data_MatHang[index];
-      //       option.text = element.TenMatHang;
-      //       option.value = JSON.stringify(element);
-      //       select.options.add(option, index);
-      //     }
-      //   });
-      // }
 
       async function getDsNhanVien() {
         await axios.get(url_NhanVien).then((res) => {
