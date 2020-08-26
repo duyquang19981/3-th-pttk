@@ -21,7 +21,11 @@
       "NgayKy": "04-11-2019",
       "ViTriDang": "Top - Banner",
       "ThoiHan": "10-11-2020",
-      "GiaHopDong": 3000000
+      "GiaHopDong": 3000000,
+      "TenMatHang": "Dau an",
+      "SoLuongHienTai": 29,
+      "SoLuongToiDa": 30,
+      "Gia": null
     },
     {
       "id": 2,
@@ -39,7 +43,11 @@
       "NgayKy": "20-11-2019",
       "ViTriDang": "Right - Banner",
       "ThoiHan": "20-11-2020",
-      "GiaHopDong": 2000000
+      "GiaHopDong": 2000000,
+      "TenMatHang": "Bàn Chải",
+      "SoLuongHienTai": 20,
+      "SoLuongToiDa": 21,
+      "Gia": null
     },
     {
       "id": 4,
@@ -161,15 +169,6 @@
     {
       "id": 22,
       "MaHopDong": 22,
-      "MaDoiTac": "1",
-      "NgayKy": "11-08-2020",
-      "ViTriDang": "Bot - Banner",
-      "ThoiHan": "27-08-2020",
-      "GiaHopDong": 2000000
-    },
-    {
-      "id": 23,
-      "MaHopDong": 23,
       "MaDoiTac": "3",
       "NgayKy": "20-11-2019",
       "ViTriDang": "Right - Banner",
@@ -177,13 +176,13 @@
       "GiaHopDong": 2000000
     },
     {
-      "id": 24,
-      "MaHopDong": 24,
+      "id": 23,
+      "MaHopDong": 23,
       "MaDoiTac": "4",
       "NgayKy": "20-11-2019",
       "ViTriDang": "Footer",
       "ThoiHan": "20-11-2022",
-      "GiaHopDong": 3000000
+      "GiaHopDong": 199999
     }
   ],
   "Comment": [
@@ -344,6 +343,128 @@
       "DiaChi": "NULL",
       "SDT": "3434454",
       "Email": "nguyenvanDgmail.com"
+    }
+  ],
+  "MatHang": [
+    {
+      "id": 1,
+      "MaMatHang": 1,
+      "TenMatHang": "Dau an",
+      "SoLuongHienTai": 29,
+      "SoLuongToiDa": 30,
+      "Gia": 2000
+    },
+    {
+      "id": 2,
+      "MaMatHang": 2,
+      "TenMatHang": "Ban Chai",
+      "SoLuongHienTai": 20,
+      "SoLuongToiDa": 21,
+      "Gia": 30000
+    },
+    {
+      "id": 3,
+      "MaMatHang": 3,
+      "TenMatHang": "Quan Ao",
+      "SoLuongHienTai": 39,
+      "SoLuongToiDa": 50,
+      "Gia": 100000
+    },
+    {
+      "id": 4,
+      "MaMatHang": 4,
+      "TenMatHang": "Ban Phim",
+      "SoLuongHienTai": 34,
+      "SoLuongToiDa": 60,
+      "Gia": 200000
+    },
+    {
+      "id": 5,
+      "MaMatHang": 5,
+      "TenMatHang": "Chuoi",
+      "SoLuongHienTai": 23,
+      "SoLuongToiDa": 49,
+      "Gia": 100000
+    },
+    {
+      "id": 6,
+      "MaMatHang": 6,
+      "TenMatHang": "Balo",
+      "SoLuongHienTai": 30,
+      "SoLuongToiDa": 40,
+      "Gia": 59000
+    },
+    {
+      "id": 7,
+      "MaMatHang": 7,
+      "TenMatHang": "Man Hinh",
+      "SoLuongHienTai": 10,
+      "SoLuongToiDa": 14,
+      "Gia": 3000000
+    },
+    {
+      "id": 8,
+      "MaMatHang": 8,
+      "TenMatHang": "Lot Chuot",
+      "SoLuongHienTai": 20,
+      "SoLuongToiDa": 24,
+      "Gia": 20000
+    },
+    {
+      "id": 9,
+      "MaMatHang": 9,
+      "TenMatHang": "Den",
+      "SoLuongHienTai": 20,
+      "SoLuongToiDa": 23,
+      "Gia": 10000
+    },
+    {
+      "id": 10,
+      "MaMatHang": 10,
+      "TenMatHang": "Micro",
+      "SoLuongHienTai": 12,
+      "SoLuongToiDa": 15,
+      "Gia": 140000
+    },
+    {
+      "id": 11,
+      "MaMatHang": 11,
+      "TenMatHang": "Tai Nghe",
+      "SoLuongHienTai": 20,
+      "SoLuongToiDa": 23,
+      "Gia": 39999
+    },
+    {
+      "id": 12,
+      "MaMatHang": 12,
+      "TenMatHang": "Dong Ho",
+      "SoLuongHienTai": 50,
+      "SoLuongToiDa": 55,
+      "Gia": 20000
+    },
+    {
+      "id": 13,
+      "MaMatHang": 13,
+      "TenMatHang": "Ti Vi",
+      "SoLuongHienTai": 20,
+      "SoLuongToiDa": 22,
+      "Gia": 1000000
+    },
+    {
+      "id": 14,
+      "MaMatHang": 14,
+      "TenMatHang": "LapTop",
+      "SoLuongHienTai": 10,
+      "SoLuongToiDa": 15,
+      "Gia": 20000000
+    },
+    {
+      "id": 15,
+      "MaMatHang": 15,
+      "TenMatHang": "Giay",
+      "SoLuongHienTai": 30,
+      "SoLuongToiDa": 60,
+      "Gia": 20000
     }
   ]
 }
