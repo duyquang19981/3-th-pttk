@@ -1,0 +1,24 @@
+{
+  "name": "3-th-pttk",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "json-server --watch db.json --port 3003",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/duyquang19981/3-th-pttk.git"
+  },
+  "author": "anh.nbs",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/duyquang19981/3-th-pttk/issues"
+  },
+  "homepage": "https://github.com/duyquang19981/3-th-pttk#readme",
+  "dependencies": {
+    "axios": "^0.19.2",
+    "json-server": "^0.16.1"
+  }
+}

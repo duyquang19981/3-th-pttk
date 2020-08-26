@@ -345,5 +345,149 @@
       "SDT": "3434454",
       "Email": "nguyenvanDgmail.com"
     }
+  ],
+  "DonNhapHang": [
+    {
+      "id": 1,
+      "MaNV": 1,
+      "NgayLap": "16/8/2020",
+      "TongSoLuongNhap": 12,
+      "LiDoNhap": "ly do nhap",
+      "MaNCC": 1,
+      "TongGia": 150000
+    },
+    {
+      "MaNV": "2",
+      "NgayLap": "22/02/2020",
+      "TongSoLuongNhap": 5,
+      "LiDoNhap": "asd",
+      "MaNCC": 2,
+      "TongGia": 500000,
+      "id": 2
+    },
+    {
+      "MaNV": "1",
+      "NgayLap": "22/02/2020",
+      "TongSoLuongNhap": 5,
+      "LiDoNhap": "asdasdasd",
+      "MaNCC": 2,
+      "TongGia": 500000,
+      "id": 3
+    },
+    {
+      "MaNV": "1",
+      "NgayLap": "22/02/2020",
+      "TongSoLuongNhap": 3,
+      "LiDoNhap": "sdsd",
+      "MaNCC": 2,
+      "TongGia": 300000,
+      "id": 4
+    },
+    {
+      "MaNV": "1",
+      "NgayLap": "26/8/2020",
+      "TongSoLuongNhap": 22,
+      "LiDoNhap": "ssdasd",
+      "MaNCC": 2,
+      "TongGia": 2200000,
+      "id": 5
+    }
+  ],
+  "DSDonNhapHang": [
+    {
+      "id": 1,
+      "MaDonNhap": 1,
+      "MaMatHang": 1,
+      "SoLuongNhap": 12,
+      "TongGia": 150000
+    },
+    {
+      "MaDonNhap": 2,
+      "MaMatHang": 2,
+      "SoLuongNhap": 5,
+      "TongGia": 500000,
+      "id": 2
+    },
+    {
+      "MaDonNhap": 3,
+      "MaMatHang": 2,
+      "SoLuongNhap": 5,
+      "TongGia": 500000,
+      "id": 3
+    },
+    {
+      "MaDonNhap": 4,
+      "MaMatHang": 2,
+      "SoLuongNhap": 3,
+      "TongGia": 300000,
+      "id": 4
+    },
+    {
+      "MaDonNhap": 5,
+      "MaMatHang": 2,
+      "SoLuongNhap": 22,
+      "TongGia": 2200000,
+      "id": 5
+    }
+  ],
+  "MatHang": [
+    {
+      "id": 1,
+      "MaLoai": 1,
+      "TenMatHang": "Mặt hàng 1",
+      "SoLuongToiDa": 100,
+      "SoLuongConLai": 10,
+      "Gia": 150000
+    },
+    {
+      "id": 2,
+      "MaLoai": 1,
+      "TenMatHang": "Mặt hàng 2",
+      "SoLuongToiDa": 100,
+      "SoLuongConLai": 47,
+      "Gia": 100000
+    }
+  ],
+  "ChungLoai": [
+    {
+      "MaLoai": 1,
+      "TenLoai": "Loại 1"
+    },
+    {
+      "MaLoai": 2,
+      "TenLoai": "Loại 2"
+    }
+  ],
+  "NhanVien": [
+    {
+      "MaNV": 1,
+      "TenNV": "Nhân viên 1",
+      "DiaChi": "Hồ chí minh",
+      "SDT": "0123456789",
+      "Email": "a@gmail.com"
+    },
+    {
+      "MaNV": 2,
+      "TenNV": "Nhân viên 2",
+      "DiaChi": "Hồ chí minh",
+      "SDT": "0123456798",
+      "Email": "b@gmail.com"
+    }
+  ],
+  "NhaCungCap": [
+    {
+      "MaNCC": 1,
+      "TenNCC": "NCC 1",
+      "DiaChi": "Hồ chí minh",
+      "LoaiHangCC": "",
+      "MatHang": 1
+    },
+    {
+      "MaNCC": 2,
+      "TenNCC": "NCC 2",
+      "DiaChi": "Hồ chí minh",
+      "LoaiHangCC": "",
+      "MatHang": 2
+    }
   ]
 }
