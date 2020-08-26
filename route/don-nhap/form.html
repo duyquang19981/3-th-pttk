@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, shrink-to-fit=no"
+    />
+    <title>Lập đơn nhập</title>
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css?family=Roboto|Varela+Round|Open+Sans"
+    />
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
+    />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/icon?family=Material+Icons"
+    />
+    <link
+      rel="stylesheet"
+      href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"
+    />
+    <!-- <link
+      rel="stylesheet"
+      href="https://cdn.datatables.net/1.10.21/css/jquery.dataTables.min.css"
+    /> -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.3/css/bootstrap.css"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdn.datatables.net/1.10.21/css/dataTables.bootstrap4.min.css"
+    />
+    <link rel="stylesheet" href="../styles.css" />
+    <link rel="stylesheet" href="./don-nhap.css" />
+  </head>
+  <body>
+    <header style="padding: 0px 50px;">
+      <div>
+        <a class="logo-link" href="../../trangchu.html">
+          <img
+            style="width: 80px; height: 70px;"
+            src="../img/logo-khtn.png"
+            alt="logo"
+            class="logo"
+        /></a>
+      </div>
+      <div class="header-title">
+        HỆ THỐNG QUẢN LÝ BÁN HÀNG QUA MẠNG - R18
+      </div>
+    </header>
+
+    <div class="container-fluid">
+      <div style="padding-bottom: 20px;">
+        <div class="btn-back">
+          <a href="./index.html"
+            ><button class="btn btn-lg btn-warning">Quay về</button></a
+          >
+        </div>
+        <h4 class="page-title text-center">LẬP ĐƠN NHẬP</h4>
+      </div>
+      <div class="row content">
+        <div class="offset-md-3 col-6">
+          <div class="card">
+            <div class="card-body">
+              <!-- <h5 class="card-title">Card title</h5> -->
+              <form>
+                <div class="form-group">
+                  <label for="reason"
+                    >Lý do nhập <span class="text-danger">*</span></label
+                  >
+                  <input
+                    type="text"
+                    class="form-control"
+                    id="reason"
+                    placeholder="Lý do nhập"
+                  />
+                </div>
+                <div class="form-row">
+                  <div class="form-group col-md-7">
+                    <label for="selectMatHang"
+                      >Chọn mặt hàng<span class="text-danger">*</span></label
+                    >
+                    <select
+                      onchange="changeMatHang()"
+                      id="selectMatHang"
+                      class="form-control"
+                    >
+                      <option value="null" disabled selected>-- Chọn --</option>
+                    </select>
+                  </div>
+                  <div class="form-group col-md-5">
+                    <label for="count"
+                      >Số lượng<span class="text-danger">*</span></label
+                    >
+                    <input
+                      type="number"
+                      class="form-control"
+                      id="count"
+                      placeholder="Số lượng"
+                    />
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label for="selectNhaCungCap">Nhà cung cấp</label>
+                  <input class="form-control" disabled id="selectNhaCungCap" />
+                </div>
+
+                <div class="form-group">
+                  <label for="selectNV"
+                    >Nhân viên<span class="text-danger">*</span></label
+                  >
+                  <select id="selectNV" class="form-control">
+                    <option value="null" disabled selected>-- Chọn --</option>
+                  </select>
+                </div>
+                <div class="form-group">
+                  <button onclick="validateForm()" class="btn btn-primary">
+                    Tạo đơn nhập
+                  </button>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <script src="https://cdn.datatables.net/1.10.21/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/1.10.21/js/dataTables.bootstrap4.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
+    <!-- axios -->
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+
+    <script src="./form.js"></script>
+
+    <script>
+      var data_DonNhap = [];
+      var data_MatHang = [];
+      var data_NhanVien = [];
+      var data_NhaCungCap = [];
+      var data_NhaCungCapMatHang = [];
+      var ncc_selected = null;
+      var matHang_selected = null;
+      $(document).ready(async function () {
+        // get Ds mat hang
+        await getDsMatHang();
+
+        // get Ds nhan vien
+        await getDsNhanVien();
+      });
+
+      async function getDsNhanVien() {
+        await axios.get(url_NhanVien).then((res) => {
+          data_NhanVien = res.data;
+          let select = document.getElementById("selectNV");
+          for (let index = 0; index < data_NhanVien.length; index++) {
+            let option = document.createElement("option");
+            let element = data_NhanVien[index];
+            option.text = element.TenNV;
+            option.value = element.MaNV;
+            select.options.add(option, index + 1);
+          }
+        });
+      }
+
+      async function getDsMatHang() {
+        await axios.get(url_MatHang).then((res) => {
+          data_MatHang = res.data;
+          let select = document.getElementById("selectMatHang");
+          select.options.length = 1;
+          for (let index = 0; index < data_MatHang.length; index++) {
+            let option = document.createElement("option");
+            let element = data_MatHang[index];
+            option.text = element.TenMatHang;
+            option.value = JSON.stringify(element);
+            select.options.add(option, index + 1);
+          }
+        });
+      }
+
+      async function changeMatHang($event) {
+        event.preventDefault();
+        let matHang = JSON.parse(event.target.value);
+        await getNCCByMaMatHang(matHang.id);
+      }
+
+      async function getNCCByMaMatHang(maMatHang) {
+        return await axios
+          .get(url_NhaCungCap + `?MatHang=${maMatHang}`)
+          .then((res) => {
+            data_NhaCungCap = res.data;
+            if (data_NhaCungCap && data_NhaCungCap.length)
+              $("#selectNhaCungCap").val(data_NhaCungCap[0].TenNCC);
+          });
+      }
+
+      function validateForm($event) {
+        event.preventDefault();
+        let reason = $("#reason").val();
+        let count = parseInt($("#count").val());
+        matHang_selected = JSON.parse($("#selectMatHang").val());
+        let nv = $("#selectNV").val();
+        let ncc = data_NhaCungCap[0];
+        let ngayLap = new Date();
+        let ngayLapString = `${ngayLap.getDate()}/${
+          ngayLap.getMonth() + 1
+        }/${ngayLap.getFullYear()}`;
+        if (!reason) {
+          return window.alert("Vui lòng nhập lý do");
+        }
+        if (!matHang_selected) {
+          return window.alert("Vui lòng chọn mặt hàng");
+        }
+        if (!count) {
+          return window.alert("Vui lòng nhập số lượng");
+        }
+        if (!nv) {
+          return window.alert("Vui lòng chọn nhân viên");
+        }
+
+        let tongGia = count * matHang_selected.Gia;
+        const model = {
+          MaNV: nv,
+          NgayLap: ngayLapString,
+          TongSoLuongNhap: count,
+          LiDoNhap: reason,
+          MaNCC: ncc.MaNCC,
+          TongGia: tongGia,
+          MaMatHang: matHang_selected.id,
+        };
+        return taoDonNhap(model);
+      }
+
+      async function taoDonNhap(model) {
+        await axios({
+          method: "POST",
+          url: url_DonNhapHang,
+          data: {
+            MaNV: model.MaNV,
+            NgayLap: model.NgayLap,
+            TongSoLuongNhap: model.TongSoLuongNhap,
+            LiDoNhap: model.LiDoNhap,
+            MaNCC: model.MaNCC,
+            TongGia: model.TongGia,
+          },
+        }).then(async (res) => {
+          if (res.status === 201) {
+            await axios({
+              method: "POST",
+              url: url_DSDonNhapHang,
+              data: {
+                MaDonNhap: res.data.id,
+                MaMatHang: model.MaMatHang,
+                SoLuongNhap: model.TongSoLuongNhap,
+                TongGia: model.TongGia,
+              },
+            }).then(async (res) => {
+              if (res.status === 201) {
+                matHang_selected.SoLuongConLai += model.TongSoLuongNhap;
+                await capNhatMatHang(matHang_selected);
+                window.alert("Tạo đơn nhập thành công.");
+                resetForm();
+                await getDsMatHang();
+              }
+            });
+          }
+        });
+      }
+
+      function resetForm() {
+        $("#reason").val(null);
+        $("#count").val(null);
+        $("#selectMatHang").val("null");
+        $("#selectNV").val("null");
+        data_NhaCungCap = [];
+        matHang_selected = null;
+      }
+
+      async function capNhatMatHang(model) {
+        return await axios({
+          method: "PATCH",
+          url: url_MatHang + `/${model.id}`,
+          data: {
+            MaLoai: model.MaLoai,
+            TenMatHang: model.TenMatHang,
+            SoLuongToiDa: model.SoLuongToiDa,
+            SoLuongConLai: model.SoLuongConLai,
+            Gia: model.Gia,
+          },
+        });
+      }
+
+      function themMatHang($event) {
+        event.preventDefault();
+        let reason = $("#reason").val();
+        let count = $("#count").val();
+        let matHang = JSON.parse($("#selectMatHang").val());
+        let nv = $("#selectNV").val();
+        let ncc = $("#selectMatHang").val();
+        let row = [
+          {
+            matHang: matHang.TenMatHang,
+            soLuong: count,
+            gia: matHang.Gia,
+          },
+        ];
+        table.rows.add(row).draw();
+      }
+
+      $("#mathang_table").on("click", "button.btn", function () {
+        table.row($(this).parents("tr")).remove().draw();
+      });
+    </script>
+  </body>
+</html>

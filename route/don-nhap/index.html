@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, shrink-to-fit=no"
+    />
+    <title>Lập đơn nhập</title>
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css?family=Roboto|Varela+Round|Open+Sans"
+    />
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
+    />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/icon?family=Material+Icons"
+    />
+    <link
+      rel="stylesheet"
+      href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"
+    />
+    <!-- <link
+      rel="stylesheet"
+      href="https://cdn.datatables.net/1.10.21/css/jquery.dataTables.min.css"
+    /> -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.3/css/bootstrap.css"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdn.datatables.net/1.10.21/css/dataTables.bootstrap4.min.css"
+    />
+    <link rel="stylesheet" href="../styles.css" />
+    <link rel="stylesheet" href="./don-nhap.css" />
+  </head>
+  <body>
+    <header style="padding: 0px 50px;">
+      <div>
+        <a class="logo-link" href="../../trangchu.html">
+          <img
+            style="width: 80px; height: 70px;"
+            src="../img/logo-khtn.png"
+            alt="logo"
+            class="logo"
+        /></a>
+      </div>
+      <div class="header-title">
+        HỆ THỐNG QUẢN LÝ BÁN HÀNG QUA MẠNG - R18
+      </div>
+    </header>
+
+    <div class="container-fluid">
+      <div style="padding-bottom: 20px;">
+        <div class="btn-back">
+          <a href="../../trangchu.html"
+            ><button class="btn btn-lg btn-warning">Quay về</button></a
+          >
+        </div>
+        <h4 class="page-title text-center">DANH SÁCH ĐƠN NHẬP</h4>
+      </div>
+      <div class="row content">
+        <div class="offset-md-1 col-md-10">
+          <div class="card">
+            <div class="card-body">
+              <div class="d-flex justify-content-end mb-2">
+                <a href="./form.html"
+                  ><button class="btn btn-primary">Lập đơn nhập</button></a
+                >
+              </div>
+              <div class="table-responsive">
+                <table
+                  datatable
+                  id="datatable"
+                  class="table table-bordered table-striped"
+                >
+                  <thead>
+                    <tr>
+                      <th>Mã đơn nhập</th>
+                      <th>Lý do</th>
+                      <th>Ngày lập</th>
+                      <th>Số lượng</th>
+                      <th>Giá</th>
+                      <th>Tác vụ</th>
+                    </tr>
+                  </thead>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <script src="https://cdn.datatables.net/1.10.21/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/1.10.21/js/dataTables.bootstrap4.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
+    <!-- axios -->
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+
+    <script src="./index.js"></script>
+
+    <script>
+      var table;
+      var data_DSDonNhap = [];
+      var data_DonNhap = [];
+      $(document).ready(async function () {
+        table = $("#datatable").DataTable({
+          columns: [
+            { data: "id" },
+            { data: "LiDoNhap" },
+            { data: "NgayLap" },
+            { data: "TongSoLuongNhap" },
+            { data: "TongGia" },
+            {
+              data: null,
+              render: (data) => {
+                return ``;
+              },
+            },
+          ],
+        });
+
+        // get Ds don nhap
+        await getDsDonNhap();
+      });
+
+      async function getDsDonNhap() {
+        await axios.get(url_DonNhapHang).then((res) => {
+          data_DSDonNhap = res.data;
+          table.rows.add(data_DSDonNhap).draw();
+        });
+      }
+
+      async function changeMatHang($event) {
+        event.preventDefault();
+        let matHang = JSON.parse(event.target.value);
+        await getNCCByMaMatHang(matHang.id);
+      }
+
+      async function getNCCByMaMatHang(maMatHang) {
+        return await axios
+          .get(url_NhaCungCap + `?MatHang=${maMatHang}`)
+          .then((res) => {
+            data_NhaCungCap = res.data;
+            if (data_NhaCungCap && data_NhaCungCap.length)
+              $("#selectNhaCungCap").val(data_NhaCungCap[0].TenNCC);
+          });
+      }
+
+      function themMatHang($event) {
+        event.preventDefault();
+        let reason = $("#reason").val();
+        let count = $("#count").val();
+        let matHang = JSON.parse($("#selectMatHang").val());
+        let nv = $("#selectNV").val();
+        let ncc = $("#selectMatHang").val();
+        let row = [
+          {
+            matHang: matHang.TenMatHang,
+            soLuong: count,
+            gia: matHang.Gia,
+          },
+        ];
+        table.rows.add(row).draw();
+      }
+
+      $("#mathang_table").on("click", "button.btn", function () {
+        table.row($(this).parents("tr")).remove().draw();
+      });
+    </script>
+  </body>
+</html>

@@ -1,0 +1,21 @@
+.page-title {
+    font-weight: bold;
+    text-align : center;
+    margin-top : 20px;
+    margin-bottom: 0;
+}
+
+.content {
+    margin-top: 10px;
+}
+
+.btn-back {
+    position: absolute;
+    left: 50px;
+}
+
+.btn_add{
+    display: flex;
+    align-items: flex-end;
+    justify-content: flex-end;
+}
