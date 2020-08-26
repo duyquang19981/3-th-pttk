@@ -21,7 +21,11 @@
       "NgayKy": "04-11-2019",
       "ViTriDang": "Top - Banner",
       "ThoiHan": "10-11-2020",
-      "GiaHopDong": 3000000
+      "GiaHopDong": 3000000,
+      "TenMatHang": "Dau an",
+      "SoLuongHienTai": 29,
+      "SoLuongToiDa": 30,
+      "Gia": null
     },
     {
       "id": 2,
@@ -39,7 +43,11 @@
       "NgayKy": "20-11-2019",
       "ViTriDang": "Right - Banner",
       "ThoiHan": "20-11-2020",
-      "GiaHopDong": 2000000
+      "GiaHopDong": 2000000,
+      "TenMatHang": "Bàn Chải",
+      "SoLuongHienTai": 20,
+      "SoLuongToiDa": 21,
+      "Gia": null
     },
     {
       "id": 4,
@@ -161,15 +169,6 @@
     {
       "id": 22,
       "MaHopDong": 22,
-      "MaDoiTac": "1",
-      "NgayKy": "11-08-2020",
-      "ViTriDang": "Bot - Banner",
-      "ThoiHan": "27-08-2020",
-      "GiaHopDong": 2000000
-    },
-    {
-      "id": 23,
-      "MaHopDong": 23,
       "MaDoiTac": "3",
       "NgayKy": "20-11-2019",
       "ViTriDang": "Right - Banner",
@@ -177,13 +176,13 @@
       "GiaHopDong": 2000000
     },
     {
-      "id": 24,
-      "MaHopDong": 24,
+      "id": 23,
+      "MaHopDong": 23,
       "MaDoiTac": "4",
       "NgayKy": "20-11-2019",
       "ViTriDang": "Footer",
       "ThoiHan": "20-11-2022",
-      "GiaHopDong": 3000000
+      "GiaHopDong": 199999
     }
   ],
   "Comment": [
