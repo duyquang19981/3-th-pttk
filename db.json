@@ -18,9 +18,9 @@
       "id": 1,
       "MaHopDong": 1,
       "MaDoiTac": 1,
-      "NgayKy": "04-11-2019",
-      "ViTriDang": "Top - Banner",
-      "ThoiHan": "10-11-2020",
+      "NgayKy": "22-11-2019",
+      "ViTriDang": "Bottom- Banner",
+      "ThoiHan": "05-09-2020",
       "GiaHopDong": 3000000
     },
     {
@@ -166,24 +166,6 @@
       "ViTriDang": "Bot - Banner",
       "ThoiHan": "27-08-2020",
       "GiaHopDong": 2000000
-    },
-    {
-      "id": 23,
-      "MaHopDong": 23,
-      "MaDoiTac": "3",
-      "NgayKy": "20-11-2019",
-      "ViTriDang": "Right - Banner",
-      "ThoiHan": "20-11-2020",
-      "GiaHopDong": 2000000
-    },
-    {
-      "id": 24,
-      "MaHopDong": 24,
-      "MaDoiTac": "4",
-      "NgayKy": "20-11-2019",
-      "ViTriDang": "Footer",
-      "ThoiHan": "20-11-2022",
-      "GiaHopDong": 3000000
     }
   ],
   "Comment": [
@@ -263,9 +245,9 @@
       "id": 10,
       "MaComment": 10,
       "MaKhachHang": "KH02",
-      "NoiDung": "I like this product",
+      "NoiDung": "I dislike this product",
       "NgayComment": "4/7/2020",
-      "Loai": "Good"
+      "Loai": "Bad"
     },
     {
       "id": 11,
@@ -360,7 +342,7 @@
       "MaNV": "2",
       "NgayLap": "22/02/2020",
       "TongSoLuongNhap": 5,
-      "LiDoNhap": "asd",
+      "LiDoNhap": "Het hang",
       "MaNCC": 2,
       "TongGia": 500000,
       "id": 2
@@ -369,7 +351,7 @@
       "MaNV": "1",
       "NgayLap": "22/02/2020",
       "TongSoLuongNhap": 5,
-      "LiDoNhap": "asdasdasd",
+      "LiDoNhap": "Het hang",
       "MaNCC": 2,
       "TongGia": 500000,
       "id": 3
@@ -378,7 +360,7 @@
       "MaNV": "1",
       "NgayLap": "22/02/2020",
       "TongSoLuongNhap": 3,
-      "LiDoNhap": "sdsd",
+      "LiDoNhap": "Het hang",
       "MaNCC": 2,
       "TongGia": 300000,
       "id": 4
@@ -387,7 +369,7 @@
       "MaNV": "1",
       "NgayLap": "26/8/2020",
       "TongSoLuongNhap": 22,
-      "LiDoNhap": "ssdasd",
+      "LiDoNhap": "Het hang",
       "MaNCC": 2,
       "TongGia": 2200000,
       "id": 5
@@ -396,10 +378,28 @@
       "MaNV": "2",
       "NgayLap": "27/8/2020",
       "TongSoLuongNhap": 6,
-      "LiDoNhap": "ád",
+      "LiDoNhap": "Het hang",
       "MaNCC": 2,
       "TongGia": 180000,
       "id": 6
+    },
+    {
+      "MaNV": "1",
+      "NgayLap": "4/9/2020",
+      "TongSoLuongNhap": 10,
+      "LiDoNhap": "Doi hang moi hon hon",
+      "MaNCC": 1,
+      "TongGia": 20000,
+      "id": 7
+    },
+    {
+      "MaNV": "2",
+      "NgayLap": "4/9/2020",
+      "TongSoLuongNhap": 20,
+      "LiDoNhap": "nhap them hang moi",
+      "MaNCC": 5,
+      "TongGia": 2000000,
+      "id": 8
     }
   ],
   "DSDonNhapHang": [
@@ -444,6 +444,20 @@
       "SoLuongNhap": 6,
       "TongGia": 180000,
       "id": 6
+    },
+    {
+      "MaDonNhap": 7,
+      "MaMatHang": 1,
+      "SoLuongNhap": 10,
+      "TongGia": 20000,
+      "id": 7
+    },
+    {
+      "MaDonNhap": 8,
+      "MaMatHang": 5,
+      "SoLuongNhap": 20,
+      "TongGia": 2000000,
+      "id": 8
     }
   ],
   "MatHang": [
@@ -453,7 +467,8 @@
       "TenMatHang": "Dau an",
       "SoLuongHienTai": 29,
       "SoLuongToiDa": 30,
-      "Gia": 2000
+      "Gia": 2000,
+      "SoLuongConLai": null
     },
     {
       "id": 2,
@@ -485,7 +500,8 @@
       "TenMatHang": "Chuoi",
       "SoLuongHienTai": 23,
       "SoLuongToiDa": 49,
-      "Gia": 100000
+      "Gia": 100000,
+      "SoLuongConLai": null
     },
     {
       "id": 6,
@@ -523,9 +539,9 @@
       "id": 10,
       "MaMatHang": 10,
       "TenMatHang": "Micro",
-      "SoLuongHienTai": 12,
-      "SoLuongToiDa": 15,
-      "Gia": 140000
+      "SoLuongHienTai": 20,
+      "SoLuongToiDa": 50,
+      "Gia": 232323
     }
   ],
   "ChungLoai": [
